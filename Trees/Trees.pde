@@ -21,6 +21,8 @@ import ddf.minim.*;
 import processing.opengl.*;
 import processing.net.*;
 
+import java.net.*;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -190,6 +192,31 @@ void setup() {
   
   lx = new P2LX(this, model);
   lx.engine.addLoopTask(speedIndependentContainer = new SpeedIndependentContainer(lx));
+
+  //ClassLoader sys = ClassLoader.getSystemClassLoader();
+  //ClassLoader sys = getClass().getClassLoader();
+  //ClassLoader sys = (URLClassLoader)Thread.currentThread().getContextClassLoader();
+  EQPattern foo = new LowEQ(lx);
+  ClassLoader sys = foo.getClass().getClassLoader();
+
+  for(URL url : ((URLClassLoader)(sys)).getURLs()) {
+    println(url.getPath());
+    //println(url.getFile());
+  }
+
+
+  //speedEffect = new SpeedEffect(lx);
+  println("fooname: " + foo.getClass().getName());
+  println("pkgname: " + foo.getClass().getPackage());
+
+  sys.loadClass("Trees$LowEQ.class");
+  //sys.loadClass(foo.getClass().getName());//"Trees$LowEQ");
+
+  //sys.loadClass("LowEQ");
+  //sys.findLoadedClass(foo.getClass().getName());//"Trees$LowEQ");
+
+  //Class.forName("Trees$LowEQ");
+  //println("foobar: " + this.getClass().getName());
 
   //configureTriggerables();
 
