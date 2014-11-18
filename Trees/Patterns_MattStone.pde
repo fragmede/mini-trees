@@ -26,15 +26,15 @@ class SyphonPattern extends TSPattern {
     this.xscale = buffWidth / model.xRange;
     this.yscale = buffHeight / model.yRange;
     int cubeIdx = 0;    
-    for (Cube cube : model.cubes) {
-      xpoints[cubeIdx] = int((cube.cx - model.xMin) * this.xscale);
-      ypoints[cubeIdx] = buffHeight - int((cube.cy - model.yMin) * this.yscale);    
+    for (Cube cube : Trees.this.model.cubes) {
+      xpoints[cubeIdx] = int((cube.cx - Trees.this.model.xMin) * this.xscale);
+      ypoints[cubeIdx] = buffHeight - int((cube.cy - Trees.this.model.yMin) * this.yscale);    
       cubeIdx++;
     }
   }
 
   private color mode1(Cube cube, int cubeIdx) {    
-    return weighted_get(imgbuffer, int(this.buffWidth * (cube.transformedTheta / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/model.yMax)), getWidth.getValuei());
+    return weighted_get(imgbuffer, int(this.buffWidth * (cube.transformedTheta / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/Trees.this.model.yMax)), getWidth.getValuei());
   }
   
   private color mode2(Cube cube, int cubeIdx) {
@@ -42,9 +42,9 @@ class SyphonPattern extends TSPattern {
     if (cube.transformedTheta > (360.0 / 2))
       reverse = true;
     if (reverse) {
-      return weighted_get(imgbuffer, int(this.buffWidth * ((((360.0 - cube.transformedTheta) * 2)) / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/model.yMax)), getWidth.getValuei());      
+      return weighted_get(imgbuffer, int(this.buffWidth * ((((360.0 - cube.transformedTheta) * 2)) / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/Trees.this.model.yMax)), getWidth.getValuei());      
     }
-    return weighted_get(imgbuffer, int(this.buffWidth * ((cube.transformedTheta * 2.0) / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/model.yMax)), getWidth.getValuei());
+    return weighted_get(imgbuffer, int(this.buffWidth * ((cube.transformedTheta * 2.0) / 360.0)), this.buffHeight - int(this.buffHeight * (cube.transformedY/Trees.this.model.yMax)), getWidth.getValuei());
   }
   
   private color mode3(Cube cube, int cubeIdx) {
@@ -63,7 +63,7 @@ class SyphonPattern extends TSPattern {
       }
       int cubeIdx = 0;
       color c = 0;
-      for (Cube cube : model.cubes) {
+      for (Cube cube : Trees.this.model.cubes) {
         switch (mode.getValuei()) {
           case 1: c = mode1(cube, cubeIdx);
                   break;
