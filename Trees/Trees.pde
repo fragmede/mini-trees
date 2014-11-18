@@ -95,6 +95,7 @@ void registerPatternTriggerables() {
   // registerPattern(new Lightning(lx));
   registerPattern("Wisps", new Wisps(lx));
   registerPattern("Fireworks", new Explosions(lx));
+  try {registerPattern("Syphon", new SyphonPattern(lx)); } catch (Throwable e) {}
 
   // registerPattern(new Explosions(lx, 20));
   // registerPattern(new Wisps(lx, 1, 60, 50, 270, 20, 3.5, 10)); // downward yellow wisp
